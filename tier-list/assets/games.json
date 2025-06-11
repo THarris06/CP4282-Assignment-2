@@ -1,5 +1,5 @@
 [
-  {"title": "Dark Souls 2", "year": 2014, "image": "ds2"},
-  {"title": "Super Mario World", "year": 1990, "image": "smw"},
-  {"title": "Metal Gear Rising: Revengeance", "year": 2013, "image": "mgrr"}
+  {"title": "Dark Souls 2", "year": 2014, "developer": "FromSoftware", "image": "ds2"},
+  {"title": "Super Mario World", "year": 1990, "developer": "Nintendo", "image": "smw"},
+  {"title": "Metal Gear Rising: Revengeance", "year": 2013, "developer": "PlatinumGames", "image": "mgrr"}
 ]

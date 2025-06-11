@@ -20,20 +20,31 @@ export default function Button({ label, index, setGame, currentIndex }: Props) {
 }
 
 const styles = StyleSheet.create({
-    buttonContainer: {
-        marginHorizontal: 5,
-    },
-    button: {
-        borderRadius: 10,
-        paddingHorizontal: 20,
-        paddingVertical: 12,
-        backgroundColor: '#333',
-    },
-    activeButton: {
-        backgroundColor: '#5558FA',
-    },
-    buttonLabel: {
-        color: '#fff',
-        fontSize: 16,
-    },
+  buttonContainer: {
+    marginHorizontal: 8,
+  },
+  button: {
+    paddingHorizontal: 24,
+    paddingVertical: 14,
+    borderRadius: 14,
+    backgroundColor: '#333',
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 3,
+  },
+  activeButton: {
+    backgroundColor: '#5558FA',
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    elevation: 8,
+  },
+  buttonLabel: {
+    color: '#fff',
+    fontSize: 17,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
+
