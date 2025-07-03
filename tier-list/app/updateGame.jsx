@@ -1,41 +1,81 @@
-import React, { useState } from "react";
-import {View, StyleSheet, TextInput, Button} from "react-native";
+import { useState, useContext } from "react";
+import {View, StyleSheet, Text, TextInput, Button} from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
+import { GameContext } from "../components/gameContext.jsx";
+
 export default function updateGame() {
-    const [selectedOption, setSelectedOption] = useState("option1");
+    const [currentGame, setCurrentGame] = useState(0);
+
+    const { gameData, setGameData } = useContext(GameContext);
+
+    const [title, setTitle] = useState(gameData[currentGame].title)
+    const [year, setYear] = useState(gameData[currentGame].year)
+    const [developer, setDev] = useState(gameData[currentGame].developer);
+    const [image, setImage] = useState(gameData[currentGame].image)
+
+    const changeYear = (value) => {
+        const updatedYear = parseInt(value);
+        setYear(updatedYear);
+    }
+
+    const updateGameData = () => {
+        const updatedData = {
+            title: title,
+            year: year,
+            developer: developer,
+            image: image
+        };
+
+        gameData[currentGame] = updatedData;
+        setGameData(gameData);
+    };
+
+    const changeGameIndex = (value) => {
+        const index = parseInt(value);
+        setTitle(gameData[index].title);
+        setYear(gameData[index].year);
+        setDev(gameData[index].developer);
+        setImage(gameData[index].image);
+    }
 
     return (
         <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                placeholder="Game Title"
-                placeholderTextColor="#666"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Release Year"
-                placeholderTextColor="#666"
-                keyboardType="numeric"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Developer"
-                placeholderTextColor="#666"
-            />
-            <View style={styles.pickerContainer}>
-                <Picker
-                    selectedValue={selectedOption}
-                    onValueChange={(itemValue) => setSelectedOption(itemValue)}
-                    style={styles.picker}
-                >
-                    <Picker.Item label="Option 1" value="option1" />
-                    <Picker.Item label="Option 2" value="option2" />
-                    <Picker.Item label="Option 3" value="option3" />
-                </Picker>
-            </View>
+            <Text>Game Index</Text>
+            <Picker
+                style={styles.picker}
+                selectedValue={currentGame}
+                onValueChange={(itemValue, itemIndex) =>
+                changeGameIndex(itemIndex)
+            }>
+                <Picker.Item label="Dark Souls 2" value="g1" />
+                <Picker.Item label="Super Mario World" value="g2" />
+                <Picker.Item label="Metal Gear Rising Revengance" value="g3" />
+            </Picker>
+
+            <Text>Title</Text>
+            <TextInput style={styles.input} value={title} onChangeText={setTitle}/>
+
+            <Text>Year</Text>
+            <TextInput style={styles.input} value={year.toString()} onChangeText={changeYear}/>
+
+            <Text>Developer</Text>
+            <TextInput style={styles.input} value={developer} onChangeText={setDev} />
+
+            <Text>Image</Text>
+            <Picker
+                style={styles.picker}
+                selectedValue={image}
+                onValueChange={(itemValue, itemIndex) =>
+                setImage(itemValue)
+            }>
+                <Picker.Item label="Dark Souls 2 #1" value="ds2" />
+                <Picker.Item label="Dark Souls 2 #2" value="ds2_2nd" />
+                <Picker.Item label="Super Mario World" value="smw" />
+                <Picker.Item label="Metal Gear Rising R" value="mgrr" />
+            </Picker>
             <View style={styles.buttonContainer}>
-                <Button title="Submit" onPress={() => { /* Add submit logic here */ }} />
+                <Button title="Update" onPress={updateGameData} />
             </View>
         </View>
     );
@@ -63,6 +103,12 @@ const styles = StyleSheet.create({
     picker: {
         width: "100%",
         height: 50,
+        backgroundColor: "#fff",
+        paddingHorizontal: 16,
+        fontSize: 16,
+        marginBottom: 16,
+        borderWidth: 1,
+        borderColor: "#ccc",
     },
     buttonContainer: {
         marginTop: 16,

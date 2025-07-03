@@ -1,8 +1,15 @@
 import { Stack, Tabs } from "expo-router";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { GameContext } from "../components/gameContext.jsx";
+import { useState } from 'react';
+import gameObject from "../assets/games.json";
 
 export default function RootLayout() {
+
+    const [gameData, setGameData] = useState(gameObject);
+
     return (
+        <GameContext.Provider value={{gameData, setGameData}}>
         <Tabs>
             <Tabs.Screen
                 name="home"
@@ -26,5 +33,6 @@ export default function RootLayout() {
                 }}
             />
         </Tabs>
+        </GameContext.Provider>
     );
 }

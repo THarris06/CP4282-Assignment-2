@@ -1,11 +1,14 @@
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet, Button} from "react-native";
+import { useRouter } from 'expo-router';
 
 export default function home() {
+    const router = useRouter();
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Top 3 Video Games</Text>
             <Text style={styles.course}>CP4282 - Programming for Mobile Devices</Text>
             <Text style={styles.name}>Tyson Harris - 20183606</Text>
+            <Button onPress={() => router.navigate('index')} title="Games"></Button>
         </View>
         )
     }
